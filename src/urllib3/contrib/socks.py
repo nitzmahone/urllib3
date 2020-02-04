@@ -193,9 +193,14 @@ class SOCKSProxyManager(PoolManager):
 
         self.proxy_url = proxy_url
 
+        hostname = parsed.host
+
+        if parsed.host == 'unixsocket':
+            hostname = parsed.path
+
         socks_options = {
             "socks_version": socks_version,
-            "proxy_host": parsed.host,
+            'proxy_host': hostname,
             "proxy_port": parsed.port,
             "username": username,
             "password": password,
